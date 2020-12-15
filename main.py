@@ -1,7 +1,11 @@
+#pyuic5 form.ui -o ui.py -x
 import sys
+
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QGridLayout
+
 from app import Ui_MainWindow
+from firstNewWindow import Ui_Dialog
 
 class App(QtWidgets.QMainWindow, Ui_MainWindow):
     def __init__(self):
@@ -10,6 +14,7 @@ class App(QtWidgets.QMainWindow, Ui_MainWindow):
         self.btnClick()
 
     def initUI(self):
+        self.setWindowTitle("Matrix calculator")
         # Создание формы и Ui
         self.setupUi(self)
         # Фиксируем размер окна
@@ -31,35 +36,46 @@ class App(QtWidgets.QMainWindow, Ui_MainWindow):
         else:
             print("Максимальная размерность матрицы 5x5!!!")
 
-# Открытие нового окна
-class openNewWindow(QtWidgets.QDialog):
+# Открытие нового окна QDialog
+class openNewWindow(QtWidgets.QDialog, Ui_Dialog):
     def __init__(self, parent=None, height=None, width=None):
         super(openNewWindow, self).__init__(parent)
 
+        #Отрисовка окна
+        self.ui = Ui_Dialog()
+        self.setupUi(self)
+        self.initUI()
+
+        # Установка размерности матрицы
         self.width = width
         self.height = height
 
-        self.initUI()
+        self.pushButton.clicked.connect(self.hel)
+
         self.generateMatrix()
 
     def initUI(self):
-        self.setWindowTitle("MatrixCalc")
-        self.setFixedSize(750, 480)
+        self.setWindowTitle("Умножения на скаляр")
+        # Фиксируем размер окна
+        self.setFixedSize(self.geometry().width(), self.geometry().height())
 
+    # Генерация пустой матрицы
     def generateMatrix(self):
-        self.grid = QGridLayout()
-        self.grid.setGeometry(QtCore.QRect(5, 5, 5, 5))
-        
-        #Генерация пустой матрицы
+        nameCounter = 0
         for h in range(self.height):
             for w in range(self.width):
-                btn = QtWidgets.QLineEdit(self)
-                btn.setFixedWidth(35)
-                self.grid.addWidget(btn, h, w, 10, 10)
-        self.setLayout(self.grid)
+                self.btn = QtWidgets.QLineEdit(self)
+                self.btn.setFixedWidth(61)
+                self.btn.setFixedHeight(31)
+                self.btn.setObjectName(f"edit_{nameCounter}")
                 
-            
+                self.gridLayout.addWidget(self.btn, h, w)
 
+                nameCounter += 1
+                print(self.btn)
+    # Умножить
+    def hel(self):
+        print(self.edit_0.text())
 
 # Экземпляр класса QApplication
 app = QtWidgets.QApplication(sys.argv)
