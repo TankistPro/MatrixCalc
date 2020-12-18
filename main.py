@@ -27,15 +27,18 @@ class App(QtWidgets.QMainWindow, Ui_MainWindow):
         self.nextBtn.clicked.connect(self.drowWindow)
 
     def drowWindow(self):
-        self.heightSize = int(self.height.text())
-        self.widthSize = int(self.width.text())
+        try:
+            self.heightSize = int(self.height.text())
+            self.widthSize = int(self.width.text())
 
-        if self.heightSize <= 5 or self.heightSize <= 5:
-            dialog = openNewWindow(self, self.heightSize, self.widthSize)
-            dialog.exec_()
-        else:
-            print("Максимальная размерность матрицы 5x5!!!")
-
+            if self.heightSize <= 5 or self.heightSize <= 5:
+                dialog = openNewWindow(self, self.heightSize, self.widthSize)
+                dialog.exec_()
+            else:
+                print("Максимальная размерность матрицы 5x5!!!")
+        except ValueError:
+            print("Некорректне значение!")
+        
 # Открытие нового окна QDialog
 class openNewWindow(QtWidgets.QDialog, Ui_Dialog):
     def __init__(self, parent=None, height=None, width=None):
@@ -50,32 +53,46 @@ class openNewWindow(QtWidgets.QDialog, Ui_Dialog):
         self.width = width
         self.height = height
 
-        self.pushButton.clicked.connect(self.hel)
-
         self.generateMatrix()
+
+        self.pushButton.clicked.connect(self.scalarMult)
 
     def initUI(self):
         self.setWindowTitle("Умножения на скаляр")
         # Фиксируем размер окна
         self.setFixedSize(self.geometry().width(), self.geometry().height())
 
-    # Генерация пустой матрицы
+    # Генерация пустой матрицы пользователя
     def generateMatrix(self):
+        self.matrixArray = {}
+
         nameCounter = 0
         for h in range(self.height):
             for w in range(self.width):
                 self.btn = QtWidgets.QLineEdit(self)
                 self.btn.setFixedWidth(61)
                 self.btn.setFixedHeight(31)
-                self.btn.setObjectName(f"edit_{nameCounter}")
                 
                 self.gridLayout.addWidget(self.btn, h, w)
 
+                self.matrixArray[nameCounter] = self.btn
+
                 nameCounter += 1
-                print(self.btn)
-    # Умножить
-    def hel(self):
-        print(self.edit_0.text())
+        
+
+    # Умножиение на скаляр
+    def scalarMult(self):
+        self.answerArray = []
+        try:
+            scalarNum = int(self.lineEdit.text())
+        except ValueError:
+            print ("Некорректне значение!")
+        
+        #print(len(self.matrixArray))
+        for key in range(len(self.matrixArray)):
+            valueMatrix = int(self.matrixArray[key].text())
+            self.answerArray.append(valueMatrix * scalarNum)
+            print(self.answerArray[key])
 
 # Экземпляр класса QApplication
 app = QtWidgets.QApplication(sys.argv)
