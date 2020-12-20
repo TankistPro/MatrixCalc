@@ -150,7 +150,7 @@
      <string>(Максимальный размер матрицы: 5 x 5)</string>
     </property>
    </widget>
-   <widget class="QCheckBox" name="checkBox">
+   <widget class="QCheckBox" name="opMatrixCb">
     <property name="geometry">
      <rect>
       <x>80</x>
@@ -168,7 +168,7 @@
      <string>Поиск определителя</string>
     </property>
    </widget>
-   <widget class="QCheckBox" name="checkBox_2">
+   <widget class="QCheckBox" name="sumMatrixCB">
     <property name="geometry">
      <rect>
       <x>120</x>
@@ -178,10 +178,10 @@
      </rect>
     </property>
     <property name="text">
-     <string>Вычитание</string>
+     <string>Сложение</string>
     </property>
    </widget>
-   <widget class="QCheckBox" name="checkBox_3">
+   <widget class="QCheckBox" name="multMatrixCB">
     <property name="geometry">
      <rect>
       <x>120</x>
@@ -194,7 +194,7 @@
      <string>Умножение</string>
     </property>
    </widget>
-   <widget class="QCheckBox" name="checkBox_4">
+   <widget class="QCheckBox" name="scalarMatrixCB">
     <property name="geometry">
      <rect>
       <x>80</x>
@@ -227,7 +227,7 @@
      <string>Выберите действие  c матрицами(-ей):</string>
     </property>
    </widget>
-   <widget class="QCheckBox" name="checkBox_5">
+   <widget class="QCheckBox" name="devMatrixCB">
     <property name="geometry">
      <rect>
       <x>120</x>

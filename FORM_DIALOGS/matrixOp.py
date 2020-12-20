@@ -4,12 +4,12 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QGridLayout
 from PyQt5.QtCore import Qt
 
-from UI_PY.firstNewWindow import Ui_Dialog
+from UI_PY.opMatrix import Ui_Dialog
 
 # Открытие нового окна QDialog (Умножение на скаляр)
-class openNewWindow(QtWidgets.QDialog, Ui_Dialog):
+class matrixOp(QtWidgets.QDialog, Ui_Dialog):
     def __init__(self, parent=None, height=None, width=None):
-        super(openNewWindow, self).__init__(parent)
+        super(matrixOp, self).__init__(parent)
 
         #Отрисовка окна
         self.ui = Ui_Dialog()
@@ -26,7 +26,7 @@ class openNewWindow(QtWidgets.QDialog, Ui_Dialog):
         self.pushButton.clicked.connect(self.scalarMult)
 
     def initUI(self):
-        self.setWindowTitle("Умножения на скаляр")
+        self.setWindowTitle("Поиск определителя")
         # Фиксируем размер окна
         self.setFixedSize(self.geometry().width(), self.geometry().height())
 
