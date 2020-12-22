@@ -1,4 +1,5 @@
 import sys
+import numpy as np
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QGridLayout
@@ -23,7 +24,7 @@ class matrixOp(QtWidgets.QDialog, Ui_Dialog):
         self.generateMatrix()
 
         # Нажатие на кнопку Умножить
-        self.pushButton.clicked.connect(self.scalarMult)
+        self.pushButton.clicked.connect(self.matrixOP)
 
     def initUI(self):
         self.setWindowTitle("Поиск определителя")
@@ -48,27 +49,26 @@ class matrixOp(QtWidgets.QDialog, Ui_Dialog):
                 nameCounter += 1
         
 
-    # Умножиение на скаляр
-    def scalarMult(self):
-        self.answerArray = []
-        try:
-            scalarNum = int(self.lineEdit.text())
-        except ValueError:
-            print ("Некорректне значение!")
-        
-        #print(len(self.matrixArray))
+    # Определитель матрицы
+    def matrixOP(self):
+        matrixString = ''
+        count = 0
         for key in range(len(self.matrixArray)):
-            valueMatrix = int(self.matrixArray[key].text())
-            self.answerArray.append(valueMatrix * scalarNum)
+            if key == 0:
+                matrixString += self.matrixArray[key].text()
+            elif key == len(self.matrixArray) - 1:
+                matrixString += " " + self.matrixArray[key].text()
+                break
+            else: 
+                matrixString += " " + self.matrixArray[key].text()
+            count += 1
+            if count == self.width:
+                matrixString += ";"
+                count = 0
 
+        self.detMatrix = round(np.linalg.det(np.matrix(matrixString)), 3)
         self.generateAnswer()
 
     # Генерация ответа 
     def generateAnswer(self):
-        self.countAnswer = 0
-        for h in range(self.height):
-            for w in range(self.width):
-                answerLabel = QtWidgets.QLabel(str(self.answerArray[self.countAnswer]))
-                answerLabel.setAlignment(Qt.AlignCenter)
-                self.answerGridLayout.addWidget(answerLabel, h, w)
-                self.countAnswer += 1
+        self.label_2.setText(str(self.detMatrix))

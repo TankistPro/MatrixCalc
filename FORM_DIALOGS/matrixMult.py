@@ -60,7 +60,7 @@ class matrixMult(QtWidgets.QDialog, Ui_Dialog):
 
                 nameCounter_2 += 1
 
-    # Умножиение на скаляр
+    # Умножиение
     def multMatrix(self):
         self.answerArray = []
         

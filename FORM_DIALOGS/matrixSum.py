@@ -60,7 +60,7 @@ class matrixSum(QtWidgets.QDialog, Ui_Dialog):
 
                 nameCounter_2 += 1
 
-    # Умножиение на скаляр
+    # Сложение матриц
     def multMatrix(self):
         self.answerArray = []
         

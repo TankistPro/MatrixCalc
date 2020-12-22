@@ -21,9 +21,9 @@ class App(QtWidgets.QMainWindow, Ui_MainWindow):
         self.btnClick()
 
     def initUI(self):
-        self.setWindowTitle("Matrix calculator")
         # Создание формы и Ui
         self.setupUi(self)
+        self.setWindowTitle("Matrix calculator")
         # Фиксируем размер окна
         self.setFixedSize(self.geometry().width(), self.geometry().height())
         # Показывает наше окно

@@ -60,7 +60,7 @@ class matrixDev(QtWidgets.QDialog, Ui_Dialog):
 
                 nameCounter_2 += 1
 
-    # Умножиение на скаляр
+    # Вычитание матриц
     def devMatrix(self):
         self.answerArray = []
         
